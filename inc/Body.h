@@ -13,14 +13,13 @@ private:
 	std::vector<std::shared_ptr<Body>> neighbors_;
 	/** bonds, the neighbor is a part of */
 	//std::vector<std::shared_ptr<Bond>> bonds_;
-	int id_;
 	Vector3d pos_;
 	Vector3d vel_;
 	Vector3d extForce_;
 	double mass_;
 public:
 	/* TODO: Set default values for some of the arguments, like velMass=1 */
-	Body(int idArg, Vector3d posArg, Vector3d velArg, Vector3d extForceArg, double massArg);
+	Body(Vector3d posArg, Vector3d velArg, Vector3d extForceArg, double massArg = 1.);
 	const Vector3d & Pos();
 };
 

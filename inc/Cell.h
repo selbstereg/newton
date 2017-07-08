@@ -13,8 +13,8 @@ public:
 	Cell();
 	Cell(const Cell &) = delete;
 	Cell & operator=(const Cell &) = delete;
-	void AddBody(int idArg, Vector3d posArg, Vector3d velArg, Vector3d extForceArg, double massArg);
-	void CreateBond(const int id, const int bodyId1, const int bodyId2, const double strength);
+	void AddBody(Vector3d posArg, Vector3d velArg, Vector3d extForceArg);
+	void CreateBond(const int bodyId1, const int bodyId2);
 	// DEBUG
 	Body & GetBody(const int id);
 };
