@@ -21,6 +21,7 @@ private:
 public:
 	/* TODO: Set default values for some of the arguments, like velMass=1 */
 	Body(int idArg, Vector3d posArg, Vector3d velArg, Vector3d extForceArg, double massArg);
+	const Vector3d & Pos();
 };
 
 #endif  /* BODY_H_ */

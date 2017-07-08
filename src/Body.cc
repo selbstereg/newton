@@ -7,3 +7,7 @@ Body::Body(int idArg, Vector3d posArg, Vector3d velArg, Vector3d extForceArg, do
 	  extForce_(extForceArg),
 	  mass_(massArg) {
 }
+
+const Vector3d & Body::Pos() {
+	return pos_;
+}

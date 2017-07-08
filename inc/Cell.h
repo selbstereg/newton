@@ -7,14 +7,14 @@
 
 class Cell {
 private:
-	std::vector<std::shared_ptr<Bond>> bonds_;
+	std::vector<Bond> bonds_;
 	std::vector<std::shared_ptr<Body>> bodies_;
 public:
 	Cell();
 	Cell(const Cell &) = delete;
 	Cell & operator=(const Cell &) = delete;
 	void AddBody(int idArg, Vector3d posArg, Vector3d velArg, Vector3d extForceArg, double massArg);
-	void CreateBond(const int id1, const int id2);
+	void CreateBond(const int id, const int bodyId1, const int bodyId2, const double strength);
 	// DEBUG
 	Body & GetBody(const int id);
 };
