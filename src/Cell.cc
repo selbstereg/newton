@@ -1,4 +1,6 @@
-#include <Cell.h>
+#include "Cell.h"
+
+#include "Utils.h"
 
 
 Cell::Cell() {
@@ -10,6 +12,12 @@ void Cell::AddBody(Vector3d posArg, Vector3d velArg, Vector3d extForceArg) {
 }
 
 Body & Cell::GetBody(const int id) {
+	if (bodies_.size() <= id) {
+		PRINT("Error: Index out of range.");
+	}
+	if (nullptr == bodies_[id]) {
+		PRINT("Nullptr");
+	}
 	return *bodies_[id];
 }
 

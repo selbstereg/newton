@@ -1,4 +1,5 @@
 #include <string>
+#include <memory>
 
 #include "Cell.h"
 
@@ -14,5 +15,5 @@ public:
 	 *
 	 * \return	Cell with particles and interactions as described in files.
 	 */
-	Cell & Load(const string posFileName, const string interFileName);
+	std::unique_ptr<Cell> Load(const string posFileName, const string interFileName);
 };

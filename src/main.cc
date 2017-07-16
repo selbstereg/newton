@@ -14,25 +14,23 @@ using std::endl;
 int main() {
 	// Create cell with bodies which interact.
 	Loader myLoader;
-	Cell & cell = myLoader.Load("/home/mert/Data/cpp/playground/newton/io/tetrahedron.bdy", 
+	auto cell = myLoader.Load("/home/mert/Data/cpp/playground/newton/io/tetrahedron.bdy", 
 				    "/home/mert/Data/cpp/playground/newton/io/tetrahedron.inter");
-	PRINT(&cell);
+	if (nullptr == cell) {
+		PRINT("Nullptr");
+	}
 
-	PRINT("Cell has " << cell.NumBodies() << " bodies and " << cell.NumBonds() << " bonds");
 
 	// Get integrator instance and initialize it.
 	Integrator * integrator = Integrator::GetInstance();
 	integrator->Init(0.01);
 
-	/*Cell cell;
-	cell.AddBody(Vector3d(0., 0., 1.));
-	cell.AddBody(Vector3d(0., 0., 0.));
-
-	cell.CreateBond(0, 1, 2.);*/
-
+	for (int i=0; i < 1000; i++) {
+		cout << i;
 		cout << " ";
-		cout << cell.GetBody(0).GetPosition()[2];
+		cout << cell->GetBody(0).GetPosition()[2];
 		cout << " ";
-		cout << cell.GetBody(1).GetPosition()[2] << endl;
-		integrator->Integrate(cell);
+		cout << cell->GetBody(1).GetPosition()[2] << endl;
+		cell = integrator->Integrate(std::move(cell));
+	}
 }

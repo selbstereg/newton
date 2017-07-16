@@ -32,7 +32,7 @@ public:
          * It would be nice to calculate x_i(t+1) = x_i(t) + v_i(t), but the result of (3) would have
          * to be cached and the program would loose simplicity.
          */
-	void Integrate(Cell & cell);
+	std::unique_ptr<Cell> Integrate(std::unique_ptr<Cell> cell);
 };
 
 #endif
