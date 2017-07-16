@@ -9,18 +9,29 @@ using Eigen::Vector3d;
 
 class Body {
 private:
-	/** neighbors which which the body has bonds */
-	std::vector<std::shared_ptr<Body>> neighbors_;
-	/** bonds, the neighbor is a part of */
-	//std::vector<std::shared_ptr<Bond>> bonds_;
+        /** Position of the body. */
 	Vector3d pos_;
+        /** Velocity of the body. */
 	Vector3d vel_;
+        /** External force acting on the body. */
 	Vector3d extForce_;
+        /** Interaction force actiong on the body. */
+	Vector3d force_;
+        /** Mass of the body */
 	double mass_;
 public:
-	/* TODO: Set default values for some of the arguments, like velMass=1 */
+	/** Constructor
+         * 
+         */
 	Body(Vector3d posArg, Vector3d velArg, Vector3d extForceArg, double massArg = 1.);
-	const Vector3d & Pos();
+	void SetForce(const Vector3d forceArg);
+	const Vector3d GetForce() const;
+	const Vector3d GetExtForce() const;
+	const Vector3d GetPosition() const;
+	const Vector3d GetVelocity() const;
+	const double GetMass() const;
+	void AddToVelocity(const Vector3d addVel);
+	void AddToPosition(const Vector3d addPos);
 };
 
 #endif  /* BODY_H_ */

@@ -12,7 +12,11 @@ private:
 	double eqDist_;
 	double strength_;
 public:
-	Bond(std::shared_ptr<Body> partner1Arg, std::shared_ptr<Body> partner2Arg, double strengthArg = 1.);
+	Bond(std::shared_ptr<Body> partner1Arg, std::shared_ptr<Body> partner2Arg);
+	Bond(std::shared_ptr<Body> partner1Arg, std::shared_ptr<Body> partner2Arg, double eqDistArg, double strengthArg = 1.);
+	Body & GetBody(const int partnerNumber);
+	const double GetEqDist() const;
+	const double GetStrength() const;
 };
 
 #endif

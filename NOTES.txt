@@ -1,0 +1,7 @@
+make Integrator friend class of Cell so it can use methods, that allow mutation of bodies positions, velocities and forces
+
+In Integrator::Integrate there is a lot of confusion with the usage of const Getters, the constness of local variables, etc.
+
+Should Body & Bond::GetBody(const int partnerNumber) get a const this-pointer? Consider its usage: Actually everyth, that goes on inside it should also work with a const this-pointer.
+
+Does the const int function definitions like "const Vector3d & Pos();" actually do anything?

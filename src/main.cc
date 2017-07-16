@@ -3,17 +3,36 @@
 
 #include "Body.h"
 #include "Cell.h"
+#include "Loader.h"
+#include "Integrator.h"
+
+#include "Utils.h"
 
 using std::cout;
 using std::endl;
 
 int main() {
-	Cell cell;
-	cell.AddBody(Vector3d(0., 0., 1.), Vector3d(1., 1., 1.), Vector3d(0.0, 0., 0.));
-	cell.AddBody(Vector3d(0., 0., 0.), Vector3d(1., 1., 1.), Vector3d(0.0, 0., 0.));
+	// Create cell with bodies which interact.
+	Loader myLoader;
+	Cell & cell = myLoader.Load("/home/mert/Data/cpp/playground/newton/io/tetrahedron.bdy", 
+				    "/home/mert/Data/cpp/playground/newton/io/tetrahedron.inter");
+	PRINT(&cell);
 
-	cell.CreateBond(0, 1);
+	PRINT("Cell has " << cell.NumBodies() << " bodies and " << cell.NumBonds() << " bonds");
 
-	cout << &cell.GetBody(0) << endl;
-	cout << &cell.GetBody(1) << endl;
+	// Get integrator instance and initialize it.
+	Integrator * integrator = Integrator::GetInstance();
+	integrator->Init(0.01);
+
+	/*Cell cell;
+	cell.AddBody(Vector3d(0., 0., 1.));
+	cell.AddBody(Vector3d(0., 0., 0.));
+
+	cell.CreateBond(0, 1, 2.);*/
+
+		cout << " ";
+		cout << cell.GetBody(0).GetPosition()[2];
+		cout << " ";
+		cout << cell.GetBody(1).GetPosition()[2] << endl;
+		integrator->Integrate(cell);
 }
