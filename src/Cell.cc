@@ -11,16 +11,6 @@ void Cell::AddBody(Vector3d posArg, Vector3d velArg, Vector3d extForceArg) {
 	bodies_.push_back(newBody);
 }
 
-Body & Cell::GetBody(const int id) {
-	if (bodies_.size() <= id) {
-		PRINT("Error: Index out of range.");
-	}
-	if (nullptr == bodies_[id]) {
-		PRINT("Nullptr");
-	}
-	return *bodies_[id];
-}
-
 void Cell::CreateBond(const int id1, const int id2) {
 	auto body1 = bodies_[id1];
 	auto body2 = bodies_[id2];
@@ -51,4 +41,14 @@ int Cell::NumBodies() const {
 
 int Cell::NumBonds() const {
 	return bonds_.size();
+}
+
+void Cell::PrintPositions(std::ostream & out) const {
+	for (auto body : bodies_) {
+		Vector3d pos = body->GetPosition();
+		for (int i=0; i<3; i++) {
+			out << " " << pos(i);
+		}
+	}
+	out << std::endl;
 }

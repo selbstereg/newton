@@ -1,8 +1,6 @@
 
 #include "Loader.h"
 
-#include <fstream> 
-
 #include "Utils.h"
 
 
@@ -12,7 +10,7 @@
  * \param[in]	posFileName	Path to the file, which contains the particle positions.
  * \param[out]	cell		Cell to which the particles are added.
  */
-std::unique_ptr<Cell> ReadPositions(std::unique_ptr<Cell> cell, const string posFileName) {
+/*std::unique_ptr<Cell> ReadPositions(std::unique_ptr<Cell> cell, const string posFileName) {
 	string curLine;
 	PRINT("Reading positions from " << posFileName);
 
@@ -48,7 +46,7 @@ std::unique_ptr<Cell> ReadPositions(std::unique_ptr<Cell> cell, const string pos
 	}
 	posFile.close();
 	return std::move(cell);
-}
+}*/
 
 /** Reads pair interactions from a file
  * and sets them up between bodies in the cell.
@@ -56,7 +54,7 @@ std::unique_ptr<Cell> ReadPositions(std::unique_ptr<Cell> cell, const string pos
  * \param[in]	interFileName	Path to the file, which contains the interactions.
  * \param[out]	cell		Cell in which the interactions are set up.
  */
-std::unique_ptr<Cell> ReadInteractions(std::unique_ptr<Cell> cell, const string interFileName) {
+/*std::unique_ptr<Cell> ReadInteractions(std::unique_ptr<Cell> cell, const string interFileName) {
 	string curLine;
 	PRINT("Reading interactions from " << interFileName);
 
@@ -92,14 +90,14 @@ std::unique_ptr<Cell> ReadInteractions(std::unique_ptr<Cell> cell, const string 
 	}
 	interFile.close();
 	return std::move(cell);
-}
+}*/
 
-std::unique_ptr<Cell> Loader::Load(const string posFileName, const string interFileName) {
+/*std::unique_ptr<Cell> Loader::Load(const string posFileName, const string interFileName) {
 	auto cell = std::make_unique<Cell>();
 
 	try {
-		cell = ReadPositions(std::move(cell), posFileName);
-		cell = ReadInteractions(std::move(cell), interFileName);
+		cell = ReadFile(std::move(cell), posFileName);
+		cell = ReadFile(std::move(cell), interFileName);
 	}
 	catch (std::exception & e) {
 		PRINT(e.what());
@@ -108,4 +106,23 @@ std::unique_ptr<Cell> Loader::Load(const string posFileName, const string interF
 	PRINT("Created Cell with " << cell->NumBodies() << " bodies and " << cell->NumBonds() << " bonds");
 
 	return std::move(cell);
+}*/
+
+
+std::unique_ptr<Cell> Loader::CreateCell(std::initializer_list<string> cellFileNames) {
+	auto cell = std::make_unique<Cell>();
+
+	for (auto fileName : cellFileNames) {
+		cell = LoadFileToCell(fileName, std::move(cell));
+	}
+	return std::move(cell);
+}
+
+std::unique_ptr<Cell> Loader::LoadFileToCell(std::string fileName, std::unique_ptr<Cell> cell) {
+	InitCurFile(fileName);
+	return std::move(cell);
+}
+
+void Loader::InitCurFile(std::string fileName) {
+
 }

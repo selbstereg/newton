@@ -3,10 +3,13 @@
 
 #include <vector>
 #include <memory>
+#include <ostream>
 
 #include "Bond.h"
 #include "Body.h"
 
+
+// TODO: Rename class to Mesh. This is more descriptive.
 /** Class represents a collection of bodies, linked by bonds */
 class Cell {
 private:
@@ -78,8 +81,10 @@ public:
 	 */
 	int NumBonds() const;
 
-	// DEBUG
-	Body & GetBody(const int id);
+	/** Print positions.
+	 *
+	 */
+	void PrintPositions(std::ostream & out) const;
 };
 
 #endif
