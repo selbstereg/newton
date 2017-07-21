@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <fstream>
 
 #include "Body.h"
 #include "Cell.h"
@@ -25,12 +26,11 @@ int main() {
 	Integrator * integrator = Integrator::GetInstance();
 	integrator->Init(0.01);
 
+	// Integrate and write particle positions to a file each frame.
+	std::ofstream outFile("/home/mert/Data/cpp/playground/newton/io/out/ort.dat");
 	for (int i=0; i < 1000; i++) {
-		cout << i;
-		cout << " ";
-		cout << cell->GetBody(0).GetPosition()[2];
-		cout << " ";
-		cout << cell->GetBody(1).GetPosition()[2] << endl;
+		cell->PrintPositions(outFile);
 		cell = integrator->Integrate(std::move(cell));
 	}
+	outFile.close();
 }

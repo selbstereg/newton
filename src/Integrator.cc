@@ -21,6 +21,10 @@ void Integrator::Init(const double dtArg) {
 }
 
 std::unique_ptr<Cell> Integrator::Integrate(std::unique_ptr<Cell> cell) {
+
+	// TODO: Move calculation of internal forces into Bond class.
+	// This will be greatly beneficial if you want to introduce different
+	// kinds of Bonds.
 	/* Calculate the interaction forces. */
 	for (auto bond: cell->GetBonds()) {
 		Body & body1 = bond.GetBody(0);

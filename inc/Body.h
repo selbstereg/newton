@@ -25,11 +25,11 @@ public:
          */
 	Body(Vector3d posArg, Vector3d velArg, Vector3d extForceArg, double massArg = 1.);
 	void SetForce(const Vector3d forceArg);
-	const Vector3d GetForce() const;
-	const Vector3d GetExtForce() const;
-	const Vector3d GetPosition() const;
-	const Vector3d GetVelocity() const;
-	const double GetMass() const;
+	Vector3d GetForce() const;
+	Vector3d GetExtForce() const;
+	Vector3d GetPosition() const;
+	Vector3d GetVelocity() const;
+	double GetMass() const;
 	void AddToVelocity(const Vector3d addVel);
 	void AddToPosition(const Vector3d addPos);
 };

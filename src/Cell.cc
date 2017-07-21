@@ -52,3 +52,13 @@ int Cell::NumBodies() const {
 int Cell::NumBonds() const {
 	return bonds_.size();
 }
+
+void Cell::PrintPositions(std::ostream & out) const {
+	for (auto body : bodies_) {
+		Vector3d pos = body->GetPosition();
+		for (int i=0; i<3; i++) {
+			out << " " << pos(i);
+		}
+	}
+	out << std::endl;
+}

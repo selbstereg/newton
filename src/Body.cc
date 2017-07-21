@@ -11,23 +11,23 @@ void Body::SetForce(Vector3d forceArg) {
 	force_ = forceArg;
 }
 
-const Vector3d Body::GetForce() const {
+Vector3d Body::GetForce() const {
 	return force_;
 }
 
-const Vector3d Body::GetExtForce() const {
+Vector3d Body::GetExtForce() const {
 	return extForce_;
 }
 
-const Vector3d Body::GetPosition() const {
+Vector3d Body::GetPosition() const {
 	return pos_;
 }
 
-const Vector3d Body::GetVelocity() const {
+Vector3d Body::GetVelocity() const {
 	return vel_;
 }
 
-const double Body::GetMass() const {
+double Body::GetMass() const {
 	return mass_;
 }
 
