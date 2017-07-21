@@ -18,8 +18,8 @@ private:
 	std::unique_ptr<Cell> cell;
 	void LoadFileToCell(const string fileName);
 	void ReadFileLines(const FileType fileType);
-	void HandleLineFromBodyFile(const string curLine);
-	void HandleLineFromBondFile(const string curLine);
+	void AddBodyToCell(const string curLine);
+	void CreateBondInCell(const string curLine);
 	void OpenCurFile(const string fileName);
 	void CloseCurFile();
 	void MakeSureFileIsReady() const;

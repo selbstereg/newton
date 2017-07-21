@@ -42,9 +42,9 @@ void Loader::ReadFileLines(const FileType fileType) {
 			continue;
 		}
 		if (FileType::BODY_FILE == fileType) {
-			HandleLineFromBodyFile(curLine);
+			AddBodyToCell(curLine);
 		} else if (FileType::BOND_FILE == fileType) {
-			HandleLineFromBondFile(curLine);
+			CreateBondInCell(curLine);
 		}
 	}
 	if (false == currentInputFile->eof()) {
@@ -52,7 +52,7 @@ void Loader::ReadFileLines(const FileType fileType) {
 	}
 }
 
-void Loader::HandleLineFromBodyFile(const string curLine) {
+void Loader::AddBodyToCell(const string curLine) {
 	double x, y, z;
 	std::istringstream curLineStream(curLine);
 	if (!(curLineStream >> x >> y >> z)) {
@@ -63,7 +63,7 @@ void Loader::HandleLineFromBodyFile(const string curLine) {
 	cell->AddBody(curPos);
 }
 
-void Loader::HandleLineFromBondFile(const string curLine) {
+void Loader::CreateBondInCell(const string curLine) {
 	int id1, id2;
 	double eqDistance;
 	std::istringstream curLineStream(curLine);
