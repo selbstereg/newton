@@ -27,7 +27,7 @@ void Loader::LoadFileToCell(const string fileName) {
 		FileType curFileType = GetFileType();
 		ReadFileLines(curFileType);
 	}
-	catch (MyException & e) {
+	catch (std::exception & e) {
 		std::cout << e.what() << std::endl;
 	}
 	CloseCurFile();
