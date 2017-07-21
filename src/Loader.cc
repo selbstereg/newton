@@ -15,6 +15,7 @@ std::unique_ptr<Cell> Loader::CreateCell(const std::initializer_list<string> cel
 
 	for (auto fileName : cellFileNames) {
 		LoadFileToCell(fileName);
+		cell->PrintConstructionStatus();
 	}
 	return std::move(cell);
 }

@@ -52,3 +52,9 @@ void Cell::PrintPositions(std::ostream & out) const {
 	}
 	out << std::endl;
 }
+
+void Cell::PrintConstructionStatus() const {
+	PRINT("Cell construction status:");
+	PRINT("\tNumber of bodies: " << bodies_.size());
+	PRINT("\tNumber of bonds: " << bonds_.size());
+}

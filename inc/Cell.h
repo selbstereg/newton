@@ -85,6 +85,11 @@ public:
 	 *
 	 */
 	void PrintPositions(std::ostream & out) const;
+
+	/** Print construction status.
+	 *
+	 */
+	void PrintConstructionStatus() const;
 };
 
 #endif
