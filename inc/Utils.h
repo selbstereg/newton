@@ -1,8 +1,8 @@
 #include <iostream>
 
-#define FILE_LINE "[ " << __FILE__ << ":" << __LINE__ << " ]\t"
-#define PRINT(x) std::cout << FILE_LINE << x << std::endl;
-#define THROW_EXCEPTION(x) std::stringstream errorMsg; errorMsg << FILE_LINE << x; throw MyException(errorMsg.str());
+#define FILE_LINE __FILE__ << ":" << __LINE__
+#define PRINT(x) std::cout << x << std::endl;
+#define THROW_EXCEPTION(x) std::stringstream errorMsg; errorMsg << "\nERROR:\n" << FILE_LINE << "\n" << x; throw MyException(errorMsg.str());
 
 
 class MyException : public std::runtime_error

@@ -15,8 +15,10 @@ using std::endl;
 int main() {
 	// Create cell with bodies which interact.
 	Loader myLoader;
-	auto cell = myLoader.CreateCell({"/home/mert/Data/cpp/playground/newton/io/tetrahedron.bdy", 
-				    "/home/mert/Data/cpp/playground/newton/io/tetrahedron.inter"});
+	auto cell = myLoader.CreateCell(
+		  {"/home/mert/Data/cpp/playground/newton/io/tetrahedron.bdy",
+		   "/home/mert/Data/cpp/playground/newton/io/tetrahedron.inter"}
+		);
 	if (nullptr == cell) {
 		PRINT("Nullptr");
 	}
