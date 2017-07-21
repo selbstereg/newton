@@ -14,10 +14,18 @@ enum class FileType {
 /** Class to load a cell from input files */
 class Loader {
 private:
-	std::ifstream currentFile;
-	std::unique_ptr<Cell> LoadFileToCell(std::string fileName, std::unique_ptr<Cell> cell);
-	void InitCurFile(std::string fileName);
+	std::unique_ptr<std::ifstream> currentInputFile;
+	std::unique_ptr<Cell> cell;
+	void LoadFileToCell(const string fileName);
+	void ReadFileLines(const FileType fileType);
+	void HandleLineFromBodyFile(const string curLine);
+	void HandleLineFromBondFile(const string curLine);
+	void OpenCurFile(const string fileName);
+	void CloseCurFile();
+	void MakeSureFileIsReady() const;
+	FileType GetFileType();
 public:
+	Loader();
 	/** Loads particle positions and interactions between particles from files.
 	 *
 	 * \param[in]	posFileName	Path to the file, which contains the positions.
@@ -25,5 +33,5 @@ public:
 	 *
 	 * \return	Cell with particles and interactions as described in files.
 	 */
-	std::unique_ptr<Cell> CreateCell(std::initializer_list<string> cellFileNames);
+	std::unique_ptr<Cell> CreateCell(const std::initializer_list<string> cellFileNames);
 };
