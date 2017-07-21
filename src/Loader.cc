@@ -43,7 +43,7 @@ void Loader::ReadFileLines(const FileType fileType) {
 		}
 		if (FileType::BODY_FILE == fileType) {
 			HandleLineFromBodyFile(curLine);
-		} else if (FileType::BODY_FILE == fileType) {
+		} else if (FileType::BOND_FILE == fileType) {
 			HandleLineFromBondFile(curLine);
 		}
 	}
