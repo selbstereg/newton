@@ -1,3 +1,5 @@
 # BOND_FILE
-# part1	part2	k	Eq Dist
+# part1	part2	Eq Dist
 0	1	2
+0	2	2
+1	2	2

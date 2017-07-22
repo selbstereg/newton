@@ -30,7 +30,13 @@ int main() {
 
 	// Integrate and write particle positions to a file each frame.
 	std::ofstream outFile("/home/mert/Data/cpp/playground/newton/io/out/ort.dat");
-	for (int i=0; i < 1000; i++) {
+	for (int i=0; i < 10000; i++) {
+		if (0 == (i % 10)) {
+			std::stringstream vtkFileName;
+			vtkFileName << "/home/mert/Data/cpp/playground/newton/io/out/pos_";
+			vtkFileName << i << ".vtk";
+			cell->PrintBodiesToVtk(vtkFileName.str());
+		}
 		cell->PrintPositions(outFile);
 		cell = integrator->Integrate(std::move(cell));
 	}

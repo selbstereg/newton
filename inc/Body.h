@@ -24,14 +24,15 @@ public:
          * 
          */
 	Body(Vector3d posArg, Vector3d velArg, Vector3d extForceArg, double massArg = 1.);
-	void SetForce(const Vector3d forceArg);
 	Vector3d GetForce() const;
 	Vector3d GetExtForce() const;
 	Vector3d GetPosition() const;
 	Vector3d GetVelocity() const;
 	double GetMass() const;
+	void SetInternalForceToZero();
 	void AddToVelocity(const Vector3d addVel);
 	void AddToPosition(const Vector3d addPos);
+	void AddToForce(const Vector3d forceArg);
 };
 
 #endif  /* BODY_H_ */

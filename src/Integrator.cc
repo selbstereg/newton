@@ -26,14 +26,15 @@ std::unique_ptr<Cell> Integrator::Integrate(std::unique_ptr<Cell> cell) {
 	// This will be greatly beneficial if you want to introduce different
 	// kinds of Bonds.
 	/* Calculate the interaction forces. */
+	cell->SetInternalForcesToZero();
 	for (auto bond: cell->GetBonds()) {
 		Body & body1 = bond.GetBody(0);
 		Body & body2 = bond.GetBody(1);
 		const Vector3d relVec = body1.GetPosition() - body2.GetPosition();
 		const double forceMag = bond.GetStrength() * (relVec.norm() - bond.GetEqDist());
 		const Vector3d force = - forceMag * relVec.normalized();
-		body1.SetForce(force);
-		body2.SetForce(-force);
+		body1.AddToForce(force);
+		body2.AddToForce(-force);
 	}
 
 	/* Update the velocities. */

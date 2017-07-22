@@ -1,5 +1,7 @@
 #include "Cell.h"
 
+#include <fstream>
+
 #include "Utils.h"
 
 
@@ -43,6 +45,12 @@ int Cell::NumBonds() const {
 	return bonds_.size();
 }
 
+void Cell::SetInternalForcesToZero() {
+	for (auto body : bodies_) {
+		body->SetInternalForceToZero();
+	}
+}
+
 void Cell::PrintPositions(std::ostream & out) const {
 	for (auto body : bodies_) {
 		Vector3d pos = body->GetPosition();
@@ -51,6 +59,23 @@ void Cell::PrintPositions(std::ostream & out) const {
 		}
 	}
 	out << std::endl;
+}
+
+void Cell::PrintBodiesToVtk(std::string fileName) const {
+	std::ofstream vtkFile(fileName);
+	if (false == vtkFile.is_open()) {
+		THROW_EXCEPTION("Unable to open file:\n\t" << fileName);
+	}
+	vtkFile << "# vtk DataFile Version 2.0\nblablabla\nASCII\nDATASET POLYDATA\n";
+	vtkFile << "POINTS " << NumBodies() << " floats\n";
+	for (auto body : bodies_) {
+		Vector3d pos = body->GetPosition();
+		for (int i=0; i<3; i++) {
+			vtkFile << pos(i) << " ";
+		}
+		vtkFile << "\n";
+	}
+	vtkFile.close();
 }
 
 void Cell::PrintConstructionStatus() const {

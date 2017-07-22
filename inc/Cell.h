@@ -17,6 +17,7 @@ private:
 	std::vector<Bond> bonds_;
         /** Bodies of the cell. */
 	std::vector<std::shared_ptr<Body>> bodies_;
+
 public:
         /** Constructor
          * 
@@ -81,10 +82,19 @@ public:
 	 */
 	int NumBonds() const;
 
+	void SetInternalForcesToZero();
+
 	/** Print positions.
 	 *
 	 */
 	void PrintPositions(std::ostream & out) const;
+
+	/** Print a vtk file containing the bodies positions for
+	 *  visualization of the system (e.g. with Paraview).
+	 *
+	 * \param[in]	fileName	Path and filename of output vtk.
+	 */
+	void PrintBodiesToVtk(std::string fileName) const;
 
 	/** Print construction status.
 	 *
