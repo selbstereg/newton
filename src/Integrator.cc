@@ -20,14 +20,14 @@ void Integrator::Init(const double dtArg) {
 	dt_ = dtArg;
 }
 
-std::unique_ptr<Cell> Integrator::Integrate(std::unique_ptr<Cell> cell) {
-
+std::unique_ptr<Cell> Integrator::Integrate(std::unique_ptr<Cell> cell, const Environment & environment) const {
 	// TODO: Move calculation of internal forces into Bond class.
 	// This will be greatly beneficial if you want to introduce different
 	// kinds of Bonds.
-	/* Calculate the interaction forces. */
+	/* Calculate the forces acting on the bodies. */
 	cell->SetInternalForcesToZero();
 	for (auto bond: cell->GetBonds()) {
+		// Forces due to bonds.
 		Body & body1 = bond.GetBody(0);
 		Body & body2 = bond.GetBody(1);
 		const Vector3d relVec = body1.GetPosition() - body2.GetPosition();
@@ -37,6 +37,12 @@ std::unique_ptr<Cell> Integrator::Integrate(std::unique_ptr<Cell> cell) {
 		body2.AddToForce(-force);
 	}
 
+	for (auto body: cell->GetBodies()) {
+		const Vector3d extForce = environment.CalcExtForce(*body);
+		body->AddToForce(extForce);
+	}
+
+	// TODO: Move the calculation into the body class.
 	/* Update the velocities. */
 	for (auto body: cell->GetBodies()) {
 		const Vector3d totalForce = body->GetForce() + body->GetExtForce();
@@ -44,9 +50,13 @@ std::unique_ptr<Cell> Integrator::Integrate(std::unique_ptr<Cell> cell) {
 		body->AddToVelocity( accelleration * dt_ );
 	}
 
+	bool first = true;
+	// TODO: Move the calculation into the body class.
 	/* Update the positions. */
 	for (auto body: cell->GetBodies()) {
+if (false == first)
 		body->AddToPosition( body->GetVelocity() * dt_ );
+first = false;
 	}
 	return std::move(cell);
 }

@@ -2,6 +2,7 @@
 #define INTEGRATOR_H_
 
 #include "Cell.h"
+#include "Environment.h"
 
 /** Singleton which integrates the trajectories of the cell's bodies. */
 class Integrator {
@@ -32,7 +33,7 @@ public:
          * It would be nice to calculate x_i(t+1) = x_i(t) + v_i(t), but the result of (3) would have
          * to be cached and the program would loose simplicity.
          */
-	std::unique_ptr<Cell> Integrate(std::unique_ptr<Cell> cell);
+	std::unique_ptr<Cell> Integrate(std::unique_ptr<Cell> cell, const Environment & environment) const;
 };
 
 #endif
